@@ -38,6 +38,7 @@ services:
     environment:
       - RAILS_ENV=development
     stdin_open: true
+    tty: true
     networks:
       default:
         aliases:
