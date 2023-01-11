@@ -1,0 +1,2 @@
+class FormSection < ApplicationRecord
+end

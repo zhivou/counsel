@@ -1,0 +1,2 @@
+class FormStatus < ApplicationRecord
+end

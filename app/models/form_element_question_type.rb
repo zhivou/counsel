@@ -1,0 +1,2 @@
+class FormElementQuestionType < ApplicationRecord
+end
