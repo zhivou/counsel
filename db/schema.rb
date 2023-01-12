@@ -66,13 +66,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_041243) do
 
   create_table "form_states", force: :cascade do |t|
     t.string "name"
-    t.bigint "form_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["form_id"], name: "index_form_states_on_form_id"
-  end
-
-  create_table "form_statuses", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -80,8 +73,10 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_041243) do
   create_table "forms", force: :cascade do |t|
     t.string "name"
     t.text "description"
+    t.bigint "form_state_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["form_state_id"], name: "index_forms_on_form_state_id"
   end
 
   add_foreign_key "form_elements", "form_element_question_types"
@@ -90,5 +85,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_041243) do
   add_foreign_key "form_responses", "forms"
   add_foreign_key "form_sections", "form_section_types"
   add_foreign_key "form_sections", "forms"
-  add_foreign_key "form_states", "forms"
+  add_foreign_key "forms", "form_states"
 end
