@@ -9,9 +9,4 @@ class Form < ApplicationRecord
     def self.get_form_state_id(state)
         FormState.find_by(name: state).id
     end
-    
-    # Find all FormElements for a given form
-    def self.get_form_elements()
-        FormElement.where(form_section_id: FormSection.where(form_id: self.id).pluck(:id))
-    end
 end
