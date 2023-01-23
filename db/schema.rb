@@ -30,9 +30,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_041243) do
     t.json "data"
     t.bigint "form_section_id"
     t.bigint "form_element_question_type_id"
+    t.bigint "form_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["form_element_question_type_id"], name: "index_form_elements_on_form_element_question_type_id"
+    t.index ["form_id"], name: "index_form_elements_on_form_id"
     t.index ["form_section_id"], name: "index_form_elements_on_form_section_id"
   end
 
@@ -81,6 +83,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_01_11_041243) do
 
   add_foreign_key "form_elements", "form_element_question_types"
   add_foreign_key "form_elements", "form_sections"
+  add_foreign_key "form_elements", "forms"
   add_foreign_key "form_responses", "form_elements"
   add_foreign_key "form_responses", "forms"
   add_foreign_key "form_sections", "form_section_types"

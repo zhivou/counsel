@@ -40,6 +40,7 @@ FormElementQuestionType.create!(name: "Paragraph")
 FormElement.create!(
     title: "Text Field",
     subtitle: "This is a text field",
+    form_id: 1,
     form_section_id: 1,
     form_element_question_type_id: 1,
     label: "Element 1",
@@ -54,6 +55,7 @@ FormElement.create!(
 FormElement.create!(
     title: "Number Field",
     subtitle: "This is a number field",
+    form_id: 1,
     form_section_id: 1,
     form_element_question_type_id: 2,
     label: "Element 2",
@@ -68,6 +70,7 @@ FormElement.create!(
 FormElement.create!(
     title: "Date Field",
     subtitle: "This is a date field",
+    form_id: 1,
     form_section_id: 2,
     form_element_question_type_id: 3,
     label: "Element 3",
@@ -82,6 +85,7 @@ FormElement.create!(
 FormElement.create!(
     title: "Time Field",
     subtitle: "This is a time field",
+    form_id: 1,
     form_section_id: 3,
     form_element_question_type_id: 4,
     label: "Element 4",

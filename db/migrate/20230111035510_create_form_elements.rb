@@ -11,6 +11,7 @@ class CreateFormElements < ActiveRecord::Migration[7.0]
       
       t.belongs_to :form_section, foreign_key: true
       t.belongs_to :form_element_question_type, foreign_key: true
+      t.belongs_to :form, foreign_key: true
 
       t.timestamps
     end
