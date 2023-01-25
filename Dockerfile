@@ -27,6 +27,7 @@ RUN apt install -y netcat
 RUN bundle update && bundle install && yarn install
 RUN bundle exec rails assets:precompile
 
+
 COPY . /app
 
 COPY entrypoint.sh /usr/bin/

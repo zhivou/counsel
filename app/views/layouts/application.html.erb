@@ -13,7 +13,11 @@
 
   <body>
     <main>
-      <%= render "navs/navbar", content: yield %>
+      <% if devise_controller? %>
+        <%= yield %>
+        <% else %>
+        <%= render "navs/navbar", content: yield %>
+      <% end %>
     </main>
   </body>
 </html>
