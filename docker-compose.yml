@@ -2,6 +2,7 @@ version: "3.9"
 
 volumes:
   data: {}
+  mono-node-modules: {}
 
 services:
   postgres:
@@ -45,3 +46,39 @@ services:
       default:
         aliases:
           - api.counsel.com
+
+  nx:
+    restart: always
+    build:
+      context: ./web
+    environment:
+      - DEV_PLATFORM=DOCKER
+    command: sh
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+    stdin_open: true
+    tty: true
+
+  storybook:
+    build:
+      context: ./web
+    environment:
+      - DEV_PLATFORM=DOCKER
+    command: >
+      /bin/sh -c " \
+        cd web; \
+        npx nx run storybook-host:build-storybook; \
+        npx nx run storybook-host:storybook --host=0.0.0.0
+      "
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+    ports:
+      - "4400:4400"
+    stdin_open: true
+    tty: true
+    networks:
+      default:
+        aliases:
+          - storybook.counsel.com
