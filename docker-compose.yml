@@ -68,8 +68,8 @@ services:
     command: >
       /bin/sh -c " \
         cd web; \
-        npx nx run storybook-host:build-storybook; \
-        npx nx run storybook-host:storybook --host=0.0.0.0
+        npx nx run admin:build-storybook; \
+        npx nx run admin:storybook --host=0.0.0.0
       "
     volumes:
       - ./:/app

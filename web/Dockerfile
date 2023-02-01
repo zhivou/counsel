@@ -8,4 +8,4 @@ RUN npm install
 
 EXPOSE 4400
 
-CMD ["yarn", "nx", "storybook", "storybook-host", "--host", "0.0.0.0" ]
+CMD ["yarn", "nx", "storybook", "admin", "--host", "0.0.0.0" ]
