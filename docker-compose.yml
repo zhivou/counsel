@@ -2,6 +2,7 @@ version: "3.9"
 
 volumes:
   data: {}
+  mono-node-modules: {}
 
 services:
   postgres:
@@ -14,10 +15,11 @@ services:
     ports:
       - '5432:5432'
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - ../data:/var/lib/postgresql/data
 
   rails:
-    build: .
+    build:
+      context: "./api"
     command: >
       /bin/sh -c " \
         while ! nc -z postgres 5432; \
@@ -27,6 +29,7 @@ services:
         done; \
         echo postgres READY; \
 
+        cd api; \
         rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'
       "
     volumes:
@@ -43,3 +46,58 @@ services:
       default:
         aliases:
           - api.counsel.com
+
+  nx:
+    restart: always
+    build:
+      context: ./web
+    environment:
+      - DEV_PLATFORM=DOCKER
+    command: sh
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+    stdin_open: true
+    tty: true
+
+  storybook:
+    build:
+      context: ./web
+    environment:
+      - DEV_PLATFORM=DOCKER
+    command: >
+      /bin/sh -c " \
+        cd web; \
+        npx nx run admin:build-storybook; \
+        npx nx run admin:storybook --host=0.0.0.0
+      "
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+    ports:
+      - "4400:4400"
+    stdin_open: true
+    tty: true
+    networks:
+      default:
+        aliases:
+          - storybook.counsel.com
+
+  admin:
+    build:
+      context: ./web
+    environment:
+      - DEV_PLATFORM=DOCKER
+    command: >
+      /bin/sh -c " \
+        cd web; \
+        npm run admin:docker
+      "
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+    stdin_open: true
+    tty: true
+    

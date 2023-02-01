@@ -22,3 +22,16 @@ Things you may want to cover:
 * Deployment instructions
 
 * ...
+
+
+npx nx generate @nrwl/react:library admin
+npx nx generate @nrwl/workspace:remove --projectName=admin
+
+Storybook generator
+npx nx g @nrwl/storybook:configuration admin
+
+Use following to regenerate elements
+nx g @nrwl/react:stories --project=<project-name>
+
+Generate component
+nx g component my-component --project=mylib
