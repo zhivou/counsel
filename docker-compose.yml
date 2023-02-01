@@ -82,3 +82,22 @@ services:
       default:
         aliases:
           - storybook.counsel.com
+
+  admin:
+    build:
+      context: ./web
+    environment:
+      - DEV_PLATFORM=DOCKER
+    command: >
+      /bin/sh -c " \
+        cd web; \
+        npm run admin:docker
+      "
+    ports:
+      - "3001:3001"
+    volumes:
+      - ./:/app
+      - mono-node-modules:/app/node_modules
+    stdin_open: true
+    tty: true
+    
